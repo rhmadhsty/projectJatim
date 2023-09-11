@@ -78,10 +78,23 @@ class DatabaseSeeder extends Seeder
             'jurusan' => 'Rekayasa Perangkat Lunak 2',
         ]);
 
+        // CREATE DATA SISWA SEED
         Siswa::create([
-            'nama' => 'Rahma Fitriani Adhisty',
-            'nis' => '0048965237',
-            'kelas_id' => '6',
+            'kelas_id' => 1,
+            'nis' => '202110469',
+            'username' => 'Natasha',
+            'nama' => 'Natashya Slavina',
+            'email' => 'natashya@gmail.com',
+            'password' => Hash::make('password'),
+            'tanggal_lahir' => '2006-1-10',
+            'telepon' => '085723465869',
+            'is_active' => 1
         ]);
+
+        // Siswa::create([
+        //     'nama' => 'Rahma Fitriani Adhisty',
+        //     'nis' => '0048965237',
+        //     'kelas_id' => '6',
+        // ]);
     }
 }

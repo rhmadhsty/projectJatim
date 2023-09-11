@@ -3,18 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Siswa extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
+
     protected $table = 'siswa';
     protected $primaryKey = 'siswa_id';
-    protected $fillable = [
-        'nama',
-        'NIS',
-        'kelas_id',
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     // Belong to ke data kelas
     public function siswaKelas()
