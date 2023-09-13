@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\PostAnnouncement;
 use App\Http\Controllers\dataSiswaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,10 @@ use App\Http\Controllers\siswaController;
 
 Route::get('/', function () {
     return view('welcome2');
+});
+
+Route::get('testNotif/', function () {
+    return event(new App\Events\PostAnnouncement('data test'));
 });
 
 Auth::routes();

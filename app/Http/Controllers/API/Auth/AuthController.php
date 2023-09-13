@@ -43,7 +43,7 @@ class AuthController extends Controller
         try {
             return response()->json([
                 'success' => true,
-                'data' => Siswa::where('siswa_id', auth('api')->user()->siswa_id)->first(),
+                'data' => Siswa::where('siswa_id', auth()->user()->siswa_id)->with('siswaKelas')->first(),
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -57,7 +57,7 @@ class AuthController extends Controller
     public function logout()
     {
         try {
-            auth('api')->user()->tokens()->delete();
+            auth()->user()->tokens()->delete();
             return response()->json([
               'success' => true,
               'message' => 'Logout successfully'
