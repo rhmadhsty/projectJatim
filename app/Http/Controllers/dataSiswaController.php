@@ -48,10 +48,22 @@ class dataSiswaController extends Controller
     {
         // dd($request);
         try {
-            $this->siswaService->create($request->all());
+            $data = [
+                'kelas_id' => $request['kelas_id'],
+                'nis' => $request['nis'],
+                'username' => $request['username'],
+                'nama' => $request['nama'],
+                'tanggal_lahir' => $request['tanggal_lahir'],
+                'email' => $request['email'],
+                'password' => $request['password'],
+                'telepon' => $request['telepon'],
+                // 'no_telp' => $request['no_telp'],
+            ];
+            $this->siswaService->create($data);
             Alert::success('Berhasil', 'Berhasil Menambahkan data Siswa');
             return back();
         } catch (Exception $Exceptation) {
+            Alert::warning('Gagal', 'Gagal Menambahkan data Siswa');
             return back();
         }
     }

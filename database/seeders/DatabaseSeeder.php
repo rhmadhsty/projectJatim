@@ -27,61 +27,61 @@ class DatabaseSeeder extends Seeder
         // ]);
         // DB::user();
 
-        // User::create([
-        //     'name' => 'Rahma Fitriani',
-        //     'role' => 'admin',
-        //     'email' => 'rhmadhsty@gmail.com',
-        //     'password' => Hash::make('12345678'),
-        //     'divisi' => 'Hubungan Industri',
-        //     'nik' => '123',
-        //     'tanggal_lahir' => '2004-11-18',
-        //     'no_telp' => '234',
+        User::create([
+            'name' => 'Rahma Fitriani',
+            'role' => 'admin',
+            'email' => 'rhmadhsty@gmail.com',
+            'password' => Hash::make('12345678'),
+            'divisi' => 'Hubungan Industri',
+            'nik' => '123',
+            'tanggal_lahir' => '2004-11-18',
+            'no_telp' => '234',
+        ]);
+
+        User::create([
+            'name' => 'Rahma Adhisty',
+            'role' => 'guru',
+            'email' => 'rahmaadhisty@gmail.com',
+            'password' => Hash::make('12345678'),
+            'divisi' => 'Guru Produktif',
+            'nik' => '321',
+            'tanggal_lahir' => '2004-10-18',
+            'no_telp' => '233',
+        ]);
+
+        // Kelas::create([
+        //     'kelas' => '10',
+        //     'jurusan' => 'Rekayasa Perangkat Lunak 1',
+        // ]);
+        // Kelas::create([
+        //     'kelas' => '10',
+        //     'jurusan' => 'Rekayasa Perangkat Lunak 2',
         // ]);
 
-        // User::create([
-        //     'name' => 'Rahma Adhisty',
-        //     'role' => 'guru',
-        //     'email' => 'rahmaadhisty@gmail.com',
-        //     'password' => Hash::make('12345678'),
-        //     'divisi' => 'Guru Produktif',
-        //     'nik' => '321',
-        //     'tanggal_lahir' => '2004-10-18',
-        //     'no_telp' => '233',
+        // Kelas::create([
+        //     'kelas' => '11',
+        //     'jurusan' => 'Rekayasa Perangkat Lunak 1',
         // ]);
 
-        Kelas::create([
-            'kelas' => '10',
-            'jurusan' => 'Rekayasa Perangkat Lunak 1',
-        ]);
-        Kelas::create([
-            'kelas' => '10',
-            'jurusan' => 'Rekayasa Perangkat Lunak 2',
-        ]);
+        // Kelas::create([
+        //     'kelas' => '11',
+        //     'jurusan' => 'Rekayasa Perangkat Lunak 2',
+        // ]);
 
-        Kelas::create([
-            'kelas' => '11',
-            'jurusan' => 'Rekayasa Perangkat Lunak 1',
-        ]);
+        // Kelas::create([
+        //     'kelas' => '12',
+        //     'jurusan' => 'Rekayasa Perangkat Lunak 1',
+        // ]);
 
-        Kelas::create([
-            'kelas' => '11',
-            'jurusan' => 'Rekayasa Perangkat Lunak 2',
-        ]);
+        // Kelas::create([ 
+        //     'kelas' => '12',
+        //     'jurusan' => 'Rekayasa Perangkat Lunak 2',
+        // ]);
 
-        Kelas::create([
-            'kelas' => '12',
-            'jurusan' => 'Rekayasa Perangkat Lunak 1',
-        ]);
-
-        Kelas::create([
-            'kelas' => '12',
-            'jurusan' => 'Rekayasa Perangkat Lunak 2',
-        ]);
-
-        Siswa::create([
-            'nama' => 'Rahma Fitriani Adhisty',
-            'nis' => '0048965237',
-            'kelas_id' => '6',
-        ]);
+        // Siswa::create([
+        //     'nama' => 'Rahma Fitriani Adhisty',
+        //     'nis' => '0048965237',
+        //     'kelas_id' => '6',
+        // ]);
     }
 }

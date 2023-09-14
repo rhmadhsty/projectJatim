@@ -12,7 +12,12 @@ class Siswa extends Model
     protected $primaryKey = 'siswa_id';
     protected $fillable = [
         'nama',
-        'NIS',
+        'nis',
+        'username',
+        'email',
+        'password',
+        'telepon',
+        'tanggal_lahir',
         'kelas_id',
     ];
 

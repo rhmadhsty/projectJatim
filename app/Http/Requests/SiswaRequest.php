@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SiswaRequest extends FormRequest
 {
@@ -25,8 +26,19 @@ class SiswaRequest extends FormRequest
         // dd($this);
         return [
             'nama' => ['required'],
-            'NIS' => ['required', 'unique:siswa'],
+            'telepon' => ['required'],
+            'tanggal_lahir' => ['required'],
+            'username' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
+            // 'is_active' => ['required'],
+            'nis' => ['required', 'unique:siswa'],
             'kelas_id' => ['required', 'numeric'],
         ];
+    }
+
+    protected function passedValidation()
+    {
+        $this->merge(['password' => Hash::make($this->input('password'))]);
     }
 }

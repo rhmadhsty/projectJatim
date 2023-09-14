@@ -18,12 +18,13 @@ class SiswaService
 
     public function create(array $data_siswa = [])
     {
-        // dd($data_siswa);
+        // dd($this);
         return $this->model->create($data_siswa);
     }
 
     public function update(Siswa $siswa, array $data_siswa = [])
     {
+        // dd($data_siswa);
         return $siswa->where('siswa_id', $data_siswa['siswa_id'])->update($data_siswa);
     }
 

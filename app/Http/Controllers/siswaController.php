@@ -75,10 +75,15 @@ class siswaController extends Controller
             $data = [
                 'siswa_id' => $request['siswa_id'],
                 'kelas_id' => $request['kelas_id'],
+                'nis' => $request['nis'],
                 'nama' => $request['nama'],
-                'NIS' => $request['NIS'],
+                'telepon' => $request['telepon'],
+                'tanggal_lahir' => $request['tanggal_lahir'],
+                'username' => $request['username'],
+                'email' => $request['email'],
+                'password' => $request['password'],
             ];
-        // dd($data);
+            // dd($data);
             // $this->siswaService->update($model, $data);
             $this->siswaService->update($model, $data);
             Alert::success('Berhasil', 'Siswa Berhasil di Edit');
@@ -87,15 +92,27 @@ class siswaController extends Controller
             Alert::warning('Gagal', 'siswa gagal di Edit');
             // return back();
             abort(502, $Exception->getMessage());
-
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(siswa $siswa, $id)
     {
-        //
+        try {
+            $siswa = siswa::find($id);
+            if ($siswa->SiswaAbsensi->count() > 0) {
+                Alert::warning('Gagal', 'Gagal Mengahapus data siswa,dikarenakan absensi siswa yang terhubung dengan data ini');
+                return back();
+            } else {
+                $this->siswaService->delete($siswa, $id);
+                Alert::success('Berhasil', 'Berhasil Hapus Data Siswa!');
+                return back();
+            }
+        } catch (Exception $Exception) {
+            Alert::warning('Gagal', 'Gagal Mengahapus data siswa');
+            return back();
+        }
     }
 }

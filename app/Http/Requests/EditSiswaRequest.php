@@ -27,8 +27,13 @@ class EditSiswaRequest extends FormRequest
         return [
             'siswa_id' => 'required|unique:siswa,siswa_id,' . $siswa_id . ',siswa_id',
             'kelas_id' => ['required'],
+            'nis' => ['required'],
             'nama' => ['required'],
-            'NIS' => ['required'],
+            'telepon' => ['required'],
+            'tanggal_lahir' => ['required'],
+            'username' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
         ];
     }
 }
