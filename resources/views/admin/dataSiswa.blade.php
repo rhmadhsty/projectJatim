@@ -141,7 +141,8 @@
                                 <div class="form-grup">
                                     <label>Password</label>
                                     <input type="password" disabled class="form-control" required
-                                        value="{{ $item->password }}">
+                                        value="{{ $item->password }}"><i
+                                            class="bi bi-eye"></i>
                                 </div>
                             </div>
                         </div>
