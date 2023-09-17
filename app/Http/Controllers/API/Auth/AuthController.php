@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -45,6 +46,46 @@ class AuthController extends Controller
                 'success' => true,
                 'data' => Siswa::where('siswa_id', auth()->user()->siswa_id)->with('siswaKelas')->first(),
             ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'error' => $th
+            ], 422);
+        }
+    }
+
+    // change password
+    public function changePass(Request $request)
+    {
+        try {
+
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password' => 'required|string|min:6',
+            'new_password' => 'required|string|min:6|same:password',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->fails(),
+                'error' => $validator->errors()
+            ], 422);
+        }
+
+        $user = $request->user();
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return response()->json(['message' => 'Password saat ini tidak sesuai'], 401);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return response()->json([
+            'message' => 'Password berhasil diubah'
+        ], 200);
+
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,

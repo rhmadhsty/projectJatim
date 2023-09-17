@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostAnnouncement;
 use App\Http\Requests\editKelasRequest;
 use App\Http\Requests\KelasRequest;
 use App\Models\Kelas;
@@ -41,10 +42,13 @@ class KelasController extends Controller
     {
         $kelas = Kelas::get();
         $siswa = Siswa::get();
+
+        broadcast(new PostAnnouncement($kelas))->toOthers();
+
         return view('admin.dataKelas', compact('kelas', 'siswa'));
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -98,7 +102,7 @@ class KelasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(editKelasRequest $request, string $id)
+    public function update(editKelasRequest $request, $id)
     {
         dd($request);
         try {
