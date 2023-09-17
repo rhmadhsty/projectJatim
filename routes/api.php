@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/profile', [AuthController::class, 'profile'])->middleware('auth:sanctum');
+    Route::post('/changepass', [AuthController::class, 'changePass'])->middleware('auth:sanctum');
+    Route::post('/checkin', [AuthController::class, 'checkin'])->middleware('auth:sanctum');
+    Route::post('/checkout', [AuthController::class, 'checkout'])->middleware('auth:sanctum');
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
+
+// Route::group(['prefix' => 'siswa', 'middleware' => 'auth:sanctum'], function () {
+//     Route::post('/vote/{id}', [VoteApiController::class, 'vote']);
+//     Route::get('/calon-osis', [CalonOsisApiController::class, 'calonOsis']);
+// });

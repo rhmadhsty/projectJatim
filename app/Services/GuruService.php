@@ -11,7 +11,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 class GuruService
 {
     protected User $model;
-
     public function __construct(User $model)
     {
         $this->model = $model;

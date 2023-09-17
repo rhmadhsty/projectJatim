@@ -38,26 +38,6 @@ class DatabaseSeeder extends Seeder
             'no_telp' => '234',
         ]);
 
-        User::create([
-            'name' => 'Rahma Adhisty',
-            'role' => 'guru',
-            'email' => 'rahmaadhisty@gmail.com',
-            'password' => Hash::make('12345678'),
-            'divisi' => 'Guru Produktif',
-            'nik' => '321',
-            'tanggal_lahir' => '2004-10-18',
-            'no_telp' => '233',
-        ]);
-
-        // Kelas::create([
-        //     'kelas' => '10',
-        //     'jurusan' => 'Rekayasa Perangkat Lunak 1',
-        // ]);
-        // Kelas::create([
-        //     'kelas' => '10',
-        //     'jurusan' => 'Rekayasa Perangkat Lunak 2',
-        // ]);
-
         // Kelas::create([
         //     'kelas' => '11',
         //     'jurusan' => 'Rekayasa Perangkat Lunak 1',
@@ -77,6 +57,29 @@ class DatabaseSeeder extends Seeder
         //     'kelas' => '12',
         //     'jurusan' => 'Rekayasa Perangkat Lunak 2',
         // ]);
+
+        Kelas::create([
+            'kelas' => '12',
+            'jurusan' => 'Rekayasa Perangkat Lunak 1',
+        ]);
+
+        Kelas::create([
+            'kelas' => '12',
+            'jurusan' => 'Rekayasa Perangkat Lunak 2',
+        ]);
+
+        // CREATE DATA SISWA SEED
+        Siswa::create([
+            'kelas_id' => 1,
+            'nis' => '202110469',
+            'username' => 'Natasha',
+            'nama' => 'Natashya Slavina',
+            'email' => 'natashya@gmail.com',
+            'password' => Hash::make('password'),
+            'tanggal_lahir' => '2006-1-10',
+            'telepon' => '085723465869',
+            'is_active' => 1
+        ]);
 
         // Siswa::create([
         //     'nama' => 'Rahma Fitriani Adhisty',

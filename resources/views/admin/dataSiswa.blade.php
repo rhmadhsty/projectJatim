@@ -68,13 +68,85 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
 
-
-
+    {{-- Modal Tambah Data Kelas --}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="tambahKelas">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Data Kelas</h5>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('data_kelas.store') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label>Kelas</label>
+                            <input type="text" class="form-control" required name="kelas">
+                        </div>
+                        <div class="form-group">
+                            <label>Jurusan</label>
+                            <input type="text" class="form-control" required name="jurusan">
+                        </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- /End Modal Tambah Data Kelas --}}
+    {{-- Form Tambah Data Siswa --}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="tambahSiswa">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Data Kelas</h5>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('data_siswa.store') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label>Nama Siswa</label>
+                            <input type="text" class="form-control" required name="nama">
+                        </div>
+                        <div class="form-group">
+                            <label>NIS</label>
+                            <input type="text" class="form-control" required name="NIS">
+                        </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- /End Form Tambah Data Siswa --}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @foreach ($siswa as $item)
         {{-- Detail Siswa --}}
         <div class="modal fade" tabindex="1" role="dialog" id="detailSiswa-{{ $item->siswa_id }}">

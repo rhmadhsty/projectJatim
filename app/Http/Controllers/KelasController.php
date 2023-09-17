@@ -47,6 +47,7 @@ class KelasController extends Controller
     public function store(KelasRequest $request)
     {
         // dd($request);
+        // validasi dimasukkan ke kelasservice
         try {
             $this->kelasService->create($request->all());
             // Alert::success('Berhasil', 'Berhasil Menambahkan Data!');

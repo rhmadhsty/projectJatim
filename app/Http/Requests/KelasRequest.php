@@ -23,6 +23,7 @@ class KelasRequest extends FormRequest
     public function rules(): array
     {
         // dd($this);
+        // pertama keterima validasi
         return [
             'kelas' => ['required'],
             'jurusan' => ['required'],

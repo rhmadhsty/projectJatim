@@ -59,14 +59,13 @@
                     </div>
                 </div>
                 @yield('get')
-
             </div>
         </section>
     </div>
 
-    
 
-    
+
+
 
     <div class="modal fade" tabindex="-1" role="dialog" id="tambahGuru">
         <div class="modal-dialog" role="document">
@@ -77,8 +76,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('data_guru.store') }}"
-                    enctype="multipart/form-data">
+                <form method="POST" action="{{ route('data_guru.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -94,11 +92,10 @@
                             <label>Password</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="showHide"><i
-                                            class="bi bi-eye"></i></span>
+                                    <span class="input-group-text" id="showHide"><i class="bi bi-eye"></i></span>
                                 </div>
-                                <input type="password" class="form-control pwstrength"
-                                    data-indicator="pwindicator" name="password" id="password">
+                                <input type="password" class="form-control pwstrength" data-indicator="pwindicator"
+                                    name="password" id="password">
                             </div>
                         </div>
                         <div class="form-group">
@@ -122,14 +119,12 @@
                                         <i class="fas fa-phone"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control phone-number" required
-                                    name="no_telp">
+                                <input type="text" class="form-control phone-number" required name="no_telp">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer bg-whitesmoke br">
-                        <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Tambah data</button>
                     </div>
                 </form>

@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Kelas;
+use illuminate\Support\Facades\DB;
+use Exception;
 
 /**
  * @author rahmafitriani
@@ -19,7 +21,14 @@ class KelasService
     function create(array $data_kelas = [])
     {
         // dd($data_kelas);
-        return $this->model->create($data_kelas);
+        DB::beginTransaction();
+        try {
+            return $this->model->create($data_kelas);
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return $exception;
+        }
     }
 
     public function getData($id)
