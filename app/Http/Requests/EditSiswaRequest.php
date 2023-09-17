@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class editKelasRequest extends FormRequest
+class EditSiswaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,19 +22,13 @@ class editKelasRequest extends FormRequest
      */
     public function rules(): array
     {
-<<<<<<< HEAD
-        // dd($this->kelas_id);
-        $kelas_id = $this->kelas_id;
+        // dd($this);
+        $siswa_id = $this->siswa_id;
         return [
-            'kelas_id' => ['required', 'unique:kelas.kelas_id', $kelas_id],
-=======
-        $kelas_id = $this->kelas_id;
-
-        return [
-            'kelas_id' => 'required|unique:kelas,kelas_id,' . $kelas_id . ',kelas_id',
->>>>>>> dev-rhma
-            'kelas' => ['required'],
-            'jurusan' => ['required'],
+            'siswa_id' => 'required|unique:siswa,siswa_id,' . $siswa_id . ',siswa_id',
+            'kelas_id' => ['required'],
+            'nama' => ['required'],
+            'NIS' => ['required'],
         ];
     }
 }

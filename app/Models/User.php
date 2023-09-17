@@ -48,20 +48,26 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $primaryKey = 'user_id';
     protected $table = 'user';
+    protected $primaryKey = 'user_id';
 
     public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['search'] ?? false, function($query, $search){
+        // dd($filters);
+        $query->when($filters['search'] ?? false, function ($query, $search) {
             $query
-                ->where('name', 'like' , '%' . $search . '%')
-                ->orwhere('email', 'like' , '%' . $search . '%')
-                ->orwhere('divisi', 'like' , '%' . $search . '%')
-                ->orwhere('nik', 'like' , '%' . $search . '%')
-                ->orwhere('tanggal_lahir', 'like' , '%' . $search . '%')
-                ->orwhere('no_telp', 'like' , '%' . $search . '%')
-                ->orwhere('role', 'like' , '%' . $search . '%');
+                ->where('name', 'like', '%' . $search . '%')
+                ->orwhere('email', 'like', '%' . $search . '%')
+                ->orwhere('divisi', 'like', '%' . $search . '%')
+                ->orwhere('nik', 'like', '%' . $search . '%')
+                ->orwhere('tanggal_lahir', 'like', '%' . $search . '%')
+                ->orwhere('no_telp', 'like', '%' . $search . '%')
+                ->orwhere('role', 'like', '%' . $search . '%');
         });
+    }
+
+    public function absenSiswa()
+    {
+        return $this->hasMany(Absensi::class, 'user_id');
     }
 }

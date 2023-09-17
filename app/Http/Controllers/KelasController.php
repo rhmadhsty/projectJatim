@@ -18,33 +18,20 @@ class KelasController extends Controller
      */
     protected KelasService $kelasService;
 
-     public function __construct(KelasService $kelasService)
-     {
-        $this->kelasService = $kelasService;
-     }
-
-
-    public function getData($id)
+    public function __construct(KelasService $kelasService)
     {
-        try {
-            $kelas = $this->kelasService->getData($id);
-
-            return json_encode($kelas);
-        }catch (Exception $Exception)
-        {
-            return back();
-        }
+        $this->kelasService = $kelasService;
     }
-
 
     public function index()
     {
-        $kelas = Kelas::get();
+        $kelas = Kelas::latest()
+            ->filter(request(['search']))
+            ->get();
         $siswa = Siswa::get();
+        // dd($kelas);
         return view('admin.dataKelas', compact('kelas', 'siswa'));
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -60,13 +47,12 @@ class KelasController extends Controller
     public function store(KelasRequest $request)
     {
         // dd($request);
-        try{
+        try {
             $this->kelasService->create($request->all());
             // Alert::success('Berhasil', 'Berhasil Menambahkan Data!');
-            Alert()->success('Berhasil', 'Berhasil Menambahkan Data Kelas!');
-            return redirect()->route('data_siswa.index');
-        }
-        catch(Exception $Exceptation){
+            Alert::success('Berhasil', 'Berhasil Menambahkan Data Kelas!');
+            return redirect()->route('data_kelas.index');
+        } catch (Exception $Exceptation) {
             Alert::warning('Gagal', 'Gagal Menambahkan Data!');
         }
     }
@@ -80,8 +66,7 @@ class KelasController extends Controller
             $kelas = $this->kelasService->getData($id);
 
             return json_encode($kelas);
-        }catch (Exception $Exception)
-        {
+        } catch (Exception $Exception) {
             return back();
         }
     }
@@ -98,23 +83,45 @@ class KelasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(editKelasRequest $request, string $id)
+    public function update(editKelasRequest $request, Kelas $model)
     {
-        dd($request);
+        // dd($request->all());
         try {
             // Kelas = $kelas;
-            $this->kelasService->update($id, $request->all());
-            return route('data_siswa.index');
+            $data = [
+                'kelas_id' => $request['kelas_id'],
+                'kelas' => $request['kelas'],
+                'jurusan' => $request['jurusan'],
+            ];
+            $this->kelasService->update($model, $data);
+            Alert::success('Berhasil', 'Kelas Berhasil di Edit');
+            return redirect()->route('data_siswa.index');
         } catch (Exception $Exception) {
             //throw $th;
+            Alert::warning('Gagal', 'Kelas gagal di Edit');
+            abort(502, $Exception->getMessage());
+            // follow me please SOK
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Kelas $kelas, $id)
     {
-        //
+        try {
+            $dataKelas = Kelas::find($id);
+
+            if ($dataKelas->kelasSiswa->count() > 0) {
+                Alert::warning('Gagal', 'Data Ini Tersambung dengan Data siswa !');
+                return back();
+            } else {
+                $this->kelasService->delete($kelas, $id);
+                Alert::success('Berhasil', 'Berhasil menghapus data kelas !');
+                return back();
+            }
+        } catch (Exception $Exception) {
+            Alert::warning('Gagal', 'Gagal Hapus Data Kelas!');
+        }
     }
 }

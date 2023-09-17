@@ -1,6 +1,6 @@
 <?php
 
-use App\Events\PostAnnouncement;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\dataSiswaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +10,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\RekapController;
 use App\Http\Controllers\siswaController;
+use App\Models\Absensi;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,22 +27,22 @@ Route::get('/', function () {
     return view('welcome2');
 });
 
-Route::get('testNotif/', function () {
-    return event(new App\Events\PostAnnouncement('data test'));
-});
-
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::get('/home', function() {
-        return view('admin.home');
+        $sakit = Absensi::where('status', 'sakit');
+        $izin = Absensi::where('status', 'izin');
+        $alfa = Absensi::where('status', 'alfa');
+        return view('admin.home', compact('sakit', 'izin', 'alfa'));
     });
     Route::resource('data_guru', guruController::class);
+    Route::resource('blog', BlogController::class);
     Route::resource('data_siswa', siswaController::class);
     Route::resource('rekap', RekapController::class);
+    Route::get('export_excel', [RekapController::class, 'export_excel'])->name('export_excel');
     Route::resource('data_kelas', KelasController::class);
     Route::resource('data_kelas.getData', dataSiswaController::class);
 });

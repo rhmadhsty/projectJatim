@@ -10,4 +10,13 @@ class Absensi extends Model
     use HasFactory;
     protected $table = 'absensi';
     protected $primaryKey = 'absensi_id';
+
+    public function absensiSiswa(){
+        return $this->belongsTo(Siswa::class, 'absensi_id');
+    }
+
+    public function absensiGuru()
+    {
+        return $this->belongsTo(User::class, 'absensi_id');
+    }
 }

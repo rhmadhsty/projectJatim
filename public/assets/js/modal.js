@@ -1,10 +1,10 @@
-function editGuru(user_id, name) {
-    console.log(user_id)
+// function editGuru(user_id, name) {
+//     console.log(user_id)
 
-    const myModal = new bootstrap.Modal(document.getElementById('editGuru'))
-    $('name').val(name)
-    myModal.show()
-}
+//     const myModal = new bootstrap.Modal(document.getElementById('editGuru'))
+//     $('name').val(name)
+//     myModal.show()
+// }
 
 function editKelas(kelas_id, kelas, jurusan) {
     const myModal = new bootstrap.Modal(document.getElementById('editKelas'))
@@ -15,5 +15,5 @@ function editKelas(kelas_id, kelas, jurusan) {
 
 $("#tambah-siswa").fireModal({
     title: 'Tambah Data Siswa',
-    body: $('#modal-siswa')
+    body: $('#tambahSiswa')
 });

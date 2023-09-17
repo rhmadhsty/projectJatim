@@ -17,6 +17,16 @@ class Kelas extends Model
     // satu data kelas ke banyak data siswa
     // jadi bisa disimpulkan untuk melakukan Belongs to di model kelas
 
+    public function scopeFilter($query, array $filters)
+    {
+        // dd($filters);
+        $query->when($filters['search'] ?? false, function($query, $search){
+            $query
+                ->where('kelas', 'like' , '%' . $search . '%')
+                ->orwhere('jurusan', 'like' , '%' . $search . '%');
+        });
+    }
+
     public function kelasSiswa()
     {
         return $this->hasMany(Siswa::class, 'siswa_id');

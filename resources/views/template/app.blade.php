@@ -16,6 +16,16 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/prism/prism.css') }}">
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" href="{{ asset('stisla/assets/modules/summernote/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ asset('stisla/assets/modules/codemirror/lib/codemirror.css') }}">
+    <link rel="stylesheet" href="{{ asset('stisla/assets/modules/codemirror/theme/duotone-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('stisla/assets/modules/jquery-selectric/selectric.css') }}">
+
+    <!-- Favicon -->
+    <link href="{{ asset('assets/img/logo-1.png') }}" rel="icon">
+>>>>>>> dev-rhma
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/assets/css/style.css') }}">
@@ -36,6 +46,10 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
+    @include('sweetalert::alert')
+>>>>>>> dev-rhma
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
@@ -50,7 +64,11 @@
                     @yield('search')
                 </div>
                 <ul class="navbar-nav navbar-right">
+<<<<<<< HEAD
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+=======
+                    {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+>>>>>>> dev-rhma
                             class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
                             <div class="dropdown-header">Notifications
@@ -109,6 +127,7 @@
                                 <a href="#">View All <i class="fas fa-chevron-right"></i></a>
                             </div>
                         </div>
+<<<<<<< HEAD
                     </li>
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -129,6 +148,24 @@
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
+=======
+                    </li> --}}
+                    <li class="dropdown"><a href="#" data-toggle="dropdown"
+                            class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <img alt="image" src="{{ asset('stisla/assets/img/avatar/avatar-1.png') }}"
+                                class="rounded-circle mr-1">
+                            <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-title">Semangat Bekerja !</div>
+                            <a href="#" class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+>>>>>>> dev-rhma
                             </a>
                         </div>
                     </li>
@@ -149,6 +186,7 @@
                                     class="fas fa-fire"></i><span>Beranda</span></a>
                         </li>
                         <li class="{{ request()->is('data_guru') ? 'active' : '' }}">
+<<<<<<< HEAD
                             <a href="{{ route('data_guru.index') }}" class="nav-link"><i class="far fa-user"></i>
                                 <span>Data Guru</span></a>
                         </li>
@@ -158,12 +196,32 @@
                         </li>
                         <li class="{{ request()->is('data_kelas') ? 'active' : '' }}">
                             <a href="{{ route('data_kelas.index') }}" class="nav-link"><i class="fa fa-user"></i>
+=======
+                            <a href="{{ route('data_guru.index') }}" class="nav-link"><i class="bi bi-person-fill"></i>
+                                <span>Data Guru</span></a>
+                        </li>
+                        <li class="{{ request()->is('data_siswa') ? 'active' : '' }}">
+                            <a href="{{ route('data_siswa.index') }}" class="nav-link"><i
+                                    class="bi bi-people-fill"></i>
+                                <span>Data Siswa</span></a>
+                        </li>
+                        <li class="{{ request()->is('data_kelas') ? 'active' : '' }}">
+                            <a href="{{ route('data_kelas.index') }}" class="nav-link"><i
+                                    class="bi bi-door-closed-fill"></i>
+>>>>>>> dev-rhma
                                 <span>Data Kelas</span></a>
                         </li>
                         <li class="{{ request()->is('rekap') ? 'active' : '' }}">
                             <a href="{{ route('rekap.index') }}" class="nav-link"><i class="far fa-file-alt"></i>
                                 <span>Rekap Laporan</span></a>
                         </li>
+<<<<<<< HEAD
+=======
+                        <li class="{{ request()->is('blog') ? 'active' : '' }}">
+                            <a href="{{ route('blog.index') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                                <span>BLOG</span></a>
+                        </li>
+>>>>>>> dev-rhma
                     </ul>
                 </aside>
             </div>
@@ -198,9 +256,21 @@
 
     <!-- JS Libraies -->
     <script src="{{ asset('stisla/assets/modules/prism/prism.js') }}"></script>
+<<<<<<< HEAD
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('stisla/assets/js/page/bootstrap-modal.js') }}"></script>
+=======
+    <script src="{{ asset('stisla/assets/modules/summernote/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('stisla/assets/modules/codemirror/lib/codemirror.js') }}"></script>
+    <script src="{{ asset('stisla/assets/modules/codemirror/mode/javascript/javascript.js') }}"></script>
+    <script src="{{ asset('stisla/assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('stisla/assets/js/page/bootstrap-modal.js') }}"></script>
+    <script src="{{ asset('stisla/assets/js/page/modules-sweetalert.js') }}"></script>
+    <script src="{{ asset('stisla/assets/modules/sweetalert/sweetalert.min.js') }}"></script>
+>>>>>>> dev-rhma
 
     <!-- Template JS File -->
     <script src="{{ asset('stisla/assets/js/scripts.js') }}"></script>
@@ -208,6 +278,10 @@
 
     {{-- Modal Js Costum --}}
     <script src="{{ asset('assets/js/modal.js') }}"></script>
+<<<<<<< HEAD
+=======
+    {{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
+>>>>>>> dev-rhma
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
 </body>

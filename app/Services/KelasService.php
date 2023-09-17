@@ -29,7 +29,14 @@ class KelasService
 
     public function update(Kelas $kelas, array $data_kelas = [])
     {
-        dd($kelas);
-        return $kelas->update($data_kelas);
+        // $data = $kelas->where('kelas_id', $data_kelas['kelas_id'])->update($data_kelas);
+        // dd($data, $data_kelas);
+        // return $user->where('user_id', $dataGuru['user_id'])->update($dataGuru);
+        return $kelas->where('kelas_id', $data_kelas['kelas_id'])->update($data_kelas);
+    }
+
+    public function delete(Kelas $kelas, $id)
+    {
+        return $kelas->where('kelas_id', $id)->delete($kelas);
     }
 }

@@ -9,6 +9,7 @@ use App\Services\GuruService;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests;
+use App\Http\Requests\editGuruRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class guruController extends Controller
@@ -28,6 +29,8 @@ class guruController extends Controller
         $guru = User::latest()
             ->filter(request(['search']))
             ->get();
+
+        // dd($guru);
         return view('admin.dataGuru', compact('guru'));
     }
 
@@ -44,11 +47,21 @@ class guruController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        // dd($request);
         try {
-            $this->guruService->create($request->all());
+            $data = [
+                'name' => $request['name'],
+                'role' => $request['role'],
+                'email' => $request['email'],
+                'password' => $request['password'],
+                'divisi' => $request['divisi'],
+                'nik' => $request['nik'],
+                'tanggal_lahir' => $request['tanggal_lahir'],
+                'no_telp' => $request['no_telp'],
+            ];
 
-            Alert::success('Berhasil', 'Berhasil Menambahlan Data!');
+            $this->guruService->create($data);
+
+            Alert::success('Berhasil', 'Berhasil Menambahkan Data Guru!');
 
             return redirect()->route('data_guru.index');
         } catch (Exception $Exceptation) {
@@ -76,16 +89,51 @@ class guruController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(editGuruRequest $request, User $model)
     {
-        //
+        // dd($request['email']);
+        try {
+            $data = [
+                'user_id' => $request['user_id'],
+                'name' => $request['name'],
+                'role' => $request['role'],
+                'email' => $request['email'],
+                'password' => $request['password'],
+                'divisi' => $request['divisi'],
+                'nik' => $request['nik'],
+                'tanggal_lahir' => $request['tanggal_lahir'],
+                'no_telp' => $request['no_telp'],
+            ];
+            // dd($data);
+            $this->guruService->update($model, $data);
+            Alert::success('Berhasil', 'Berhasil Edit Data Guru!');
+            return back();
+        } catch (Exception $Exception) {
+            Alert::warning('Gagal', 'Gagal Mengedit Data Guru!');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user, $id)
     {
-        //
+        // dd($id);
+        try {
+            $guru = User::find($id);
+            // dd($guru);
+            if ($guru->absenSiswa->count() > 0) {
+                Alert::warning('Gagal', 'Data Ini Tersambung dengan Data Absensi siswa !');
+                return redirect()->route('data_guru.index');
+                // dd($guru);Ale
+            } else {
+                $this->guruService->delete($user, $id);
+
+                Alert::success('Berhasil', 'Berhasil Hapus Data Guru!');
+                return back();
+            }
+        } catch (Exception $Exception) {
+            Alert::warning('Gagal', 'Gagal Hapus Data Guru!');
+        }
     }
 }

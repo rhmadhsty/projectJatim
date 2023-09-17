@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @extends('template.main')
+=======
+@extends('template.app')
+>>>>>>> dev-rhma
 
 {{-- @section('content')
 <div class="container">
@@ -29,6 +33,7 @@
                 <div class="col-12">
                     <div class="card card-statistic-2">
                         <div class="card-stats">
+<<<<<<< HEAD
                             <div class="card-stats-title">Order Statistics -
                                 <div class="dropdown d-inline">
                                     <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
@@ -74,12 +79,40 @@
                             </div>
                             <div class="card-body">
                                 59
+=======
+                            <div class="card-stats-title">jumlah absen
+                            </div>
+                            <div class="card-stats-items">
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{ $sakit->count() }}</div>
+                                    <div class="card-stats-item-label">Sakit</div>
+                                </div>
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{ $izin->count() }}</div>
+                                    <div class="card-stats-item-label">Izin</div>
+                                </div>
+                                <div class="card-stats-item">
+                                    <div class="card-stats-item-count">{{ $alfa->count() }}</div>
+                                    <div class="card-stats-item-label">Alfa</div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="card-icon shadow-primary bg-primary">
+                            <i class="fas fa-archive"></i>
+                        </div> --}}
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4></h4>
+                            </div>
+                            <div class="card-body">
+>>>>>>> dev-rhma
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+<<<<<<< HEAD
             <div class="card">
                 <div class="card-header">
                     <h4>The Bootstrap Way</h4>
@@ -111,6 +144,8 @@
                 </div>
             </div>
 
+=======
+>>>>>>> dev-rhma
         </section>
     </div>
 @endsection

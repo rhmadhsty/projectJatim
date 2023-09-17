@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class StoreRequest extends FormRequest
+class editGuruRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,32 +21,25 @@ class StoreRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    // protected FormRequest $formRequest;
     public function rules(): array
     {
-<<<<<<< HEAD
+        $user_id = $this->user_id;
+
         // dd($this);
+
         return [
-            'name' => ['required'],
-            'role' => ['required', 'unique:user'],
-            'email' => ['required', 'email', 'unique:user'],
-            'password' => ['required', 'confirmed'],
-            'divisi' => ['required'],
-            'nik' => ['required', 'unique:user'],
-            'tanggal_lahir' => ['required', 'date'],
-=======
-        return [
-            'name' => ['required'],
+            'user_id' => 'required|unique:user,user_id,' . $user_id . ',user_id',
             'role' => ['required'],
-            'email' => ['required', 'email', 'unique:user'],
+            'name' => ['required'],
+            'email' => ['required', 'email'],
             'password' => ['required'],
             'divisi' => ['required'],
-            'nik' => ['required', 'unique:user'],
+            'nik' => ['required'],
             'tanggal_lahir' => ['required'],
->>>>>>> dev-rhma
             'no_telp' => ['required'],
         ];
     }
+
     protected function passedValidation()
     {
         $this->merge(['password'=>Hash::make($this->input('password'))]);
