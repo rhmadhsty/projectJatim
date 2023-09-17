@@ -22,17 +22,10 @@ class editKelasRequest extends FormRequest
      */
     public function rules(): array
     {
-<<<<<<< HEAD
-        // dd($this->kelas_id);
-        $kelas_id = $this->kelas_id;
-        return [
-            'kelas_id' => ['required', 'unique:kelas.kelas_id', $kelas_id],
-=======
         $kelas_id = $this->kelas_id;
 
         return [
             'kelas_id' => 'required|unique:kelas,kelas_id,' . $kelas_id . ',kelas_id',
->>>>>>> dev-rhma
             'kelas' => ['required'],
             'jurusan' => ['required'],
         ];

@@ -24,17 +24,6 @@ class StoreRequest extends FormRequest
     // protected FormRequest $formRequest;
     public function rules(): array
     {
-<<<<<<< HEAD
-        // dd($this);
-        return [
-            'name' => ['required'],
-            'role' => ['required', 'unique:user'],
-            'email' => ['required', 'email', 'unique:user'],
-            'password' => ['required', 'confirmed'],
-            'divisi' => ['required'],
-            'nik' => ['required', 'unique:user'],
-            'tanggal_lahir' => ['required', 'date'],
-=======
         return [
             'name' => ['required'],
             'role' => ['required'],
@@ -43,7 +32,6 @@ class StoreRequest extends FormRequest
             'divisi' => ['required'],
             'nik' => ['required', 'unique:user'],
             'tanggal_lahir' => ['required'],
->>>>>>> dev-rhma
             'no_telp' => ['required'],
         ];
     }
