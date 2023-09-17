@@ -11,8 +11,10 @@ class Absensi extends Model
     protected $table = 'absensi';
     protected $primaryKey = 'absensi_id';
 
+    protected $guarded = ['absensi_id', 'created_at', 'updated_at'];
+
     public function absensiSiswa(){
-        return $this->belongsTo(Siswa::class, 'absensi_id');
+        return $this->belongsTo(Siswa::class, 'absensi_id', 'siswa_id');
     }
 
     public function absensiGuru()

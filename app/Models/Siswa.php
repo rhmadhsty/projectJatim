@@ -13,7 +13,7 @@ class Siswa extends Authenticatable
 
     protected $table = 'siswa';
     protected $primaryKey = 'siswa_id';
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = ['siswa_id', 'created_at', 'updated_at'];
 
     // Belong to ke data kelas
     public function siswaKelas()

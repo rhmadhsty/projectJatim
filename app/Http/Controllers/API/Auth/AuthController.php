@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Absensi;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -50,6 +53,142 @@ class AuthController extends Controller
                 'success' => false,
                 'error' => $th
             ], 422);
+        }
+    }
+
+    // change password
+    public function changePass(Request $request)
+    {
+        try {
+
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password' => 'required|string|min:6',
+            'new_password' => 'required|string|min:6|same:password',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->fails(),
+                'error' => $validator->errors()
+            ], 422);
+        }
+
+        $user = $request->user();
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return response()->json(['message' => 'Password saat ini tidak sesuai'], 401);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return response()->json([
+            'message' => 'Password berhasil diubah'
+        ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'error' => $th
+            ], 422);
+        }
+    }
+
+    // checkin
+    public function checkin(Request $request)
+    {
+        // DB::beginTransaction();
+        try {
+
+            $validator = Validator::make($request->all(), [
+                'kode' => 'required',
+                'nama_lokasi' => 'required',
+                'kordinate' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => $validator->fails(),
+                    'error' => $validator->errors()
+                ], 422);
+            }
+
+            $checkin = Absensi::create([
+                'siswa_id' => auth()->user()->siswa_id,
+                'kode' => $request['kode'],
+                'nama_lokasi' => $request['nama_lokasi'],
+                'kordinate' => $request['kordinate'],
+                'tanggal' => $request['tanggal'],
+                'waktu' => $request['waktu'],
+                'status' => 1
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Success Checkin'
+            ], 200);
+
+            // DB::commit();
+
+        } catch (\Throwable $th) {
+
+            // DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'error' => $th
+            ], 422);
+
+        }
+    }
+
+    // checkout
+    public function checkout(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+
+            $validator = Validator::make($request->all(), [
+                'siswa_id' => 'required',
+                'kode' => 'required',
+                'nama_lokasi' => 'required',
+                'kordinate' => 'required',
+                'tanggal' => 'required',
+                'waktu' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => $validator->fails(),
+                    'error' => $validator->errors()
+                ], 422);
+            }
+
+            $checkin = Absensi::create([
+                'siswa_id' => auth()->user()->siswa_id,
+                'kode' => $request['kode'],
+                'nama_lokasi' => $request['nama_lokasi'],
+                'kordinate' => $request['kordinate'],
+                'tanggal' => $request['tanggal'],
+                'waktu' => $request['waktu'],
+                'status' => 0
+            ]);
+
+            return $checkin;
+
+            DB::commit();
+
+        } catch (\Throwable $th) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'error' => $th
+            ], 422);
+
         }
     }
 
