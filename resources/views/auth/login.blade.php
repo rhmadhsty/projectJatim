@@ -49,7 +49,7 @@
                                     class=""></a>
                         </div>
 
-                        <div class="card card-primary">
+                        <div class="card">
                             <div class="card-header">
                                 <h4>Login</h4>
                             </div>

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\editKelasRequest;
 use App\Http\Requests\KelasRequest;
+use App\Imports\KelasImport;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Services\KelasService;
 use Exception;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class KelasController extends Controller
@@ -36,9 +38,11 @@ class KelasController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function import()
     {
-        //
+        Excel::import(new KelasImport, request()->file('import-kelas'));
+        Alert::success('Berhail Import!');
+        return back();
     }
 
     /**

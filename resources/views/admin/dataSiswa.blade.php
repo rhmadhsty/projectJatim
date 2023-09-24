@@ -46,6 +46,9 @@
                                                     <a type="button" class="btn btn-primary" href="#"
                                                         data-toggle="modal"
                                                         data-target="#detailSiswa-{{ $item->siswa_id }}">Detail</a>
+                                                    <a type="button" class="btn btn-success" href="#"
+                                                        data-toggle="modal"
+                                                        data-target="#absensi-{{ $item->siswa_id }}">ABSENSI</a>
                                                     {{-- <a type="button" class="btn btn-success" href="#"
                                                         data-toggle="modal"
                                                         data-target="#editSiswa-{{ $item->siswa_id }}">Edit</a>
@@ -70,82 +73,6 @@
                 </div>
             </div>
         </section>
-    </div>
-
-    {{-- Modal Tambah Data Kelas --}}
-    <div class="modal fade" tabindex="-1" role="dialog" id="tambahKelas">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data Kelas</h5>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('data_kelas.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label>Kelas</label>
-                            <input type="text" class="form-control" required name="kelas">
-                        </div>
-                        <div class="form-group">
-                            <label>Jurusan</label>
-                            <input type="text" class="form-control" required name="jurusan">
-                        </div>
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- /End Modal Tambah Data Kelas --}}
-    {{-- Form Tambah Data Siswa --}}
-    <div class="modal fade" tabindex="-1" role="dialog" id="tambahSiswa">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data Kelas</h5>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('data_siswa.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label>Nama Siswa</label>
-                            <input type="text" class="form-control" required name="nama">
-                        </div>
-                        <div class="form-group">
-                            <label>NIS</label>
-                            <input type="text" class="form-control" required name="NIS">
-                        </div>
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- /End Form Tambah Data Siswa --}}
-    <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
     </div>
     @foreach ($siswa as $item)
         {{-- Detail Siswa --}}
@@ -213,8 +140,7 @@
                                 <div class="form-grup">
                                     <label>Password</label>
                                     <input type="password" disabled class="form-control" required
-                                        value="{{ $item->password }}"><i
-                                            class="bi bi-eye"></i>
+                                        value="{{ $item->password }}"><i class="bi bi-eye"></i>
                                 </div>
                             </div>
                         </div>
@@ -227,5 +153,68 @@
             </div>
         </div>
         {{-- End Detail Siswa --}}
+
+        {{-- Absen --}}
+        <div class="modal fade" tabindex="1" role="dialog" id="absensi-{{ $item->siswa_id }}">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Absensi Siswa</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            {{-- <div class="row mb-3"></div> --}}
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Foto Siswa</label>
+                                    <br>
+                                    {{-- <p> --}}
+                                    <figure class="avatar mr-2 avatar-xl text-center">
+                                        <img src="{{ asset('stisla/assets/img/avatar/avatar-2.png') }}" alt="foto Guru">
+                                    </figure>
+                                    {{-- </p> --}}
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group ">
+                                    <label>Nama Siswa / Username</label>
+                                    <input type="text" disabled class="form-control" required
+                                        value="{{ $item->nama }} / {{ $item->username }}">
+                                </div>
+                                <div class="form-group ">
+                                    <label>NIS</label>
+                                    <input type="text" disabled class="form-control" required
+                                        value="{{ $item->nis }}">
+                                </div>
+                            </div>
+                        </div>
+                        <form action="{{ route('absensi.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="siswa_id" id="siswa_id" value="{{ $item->siswa_id }}">
+                            <div class="form-group">
+                                <label>KEHADIRAN</label>
+                                <select class="form-control" name="status">
+                                    <option value="sakit">Sakit</option>
+                                    <option value="izin">Izin</option>
+                                    <option value="alfa">Alfa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                <textarea type="text" class="form-control" required name="keterangan"
+                                    value="{{ $item->nis }}"></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="submit" class="btn btn-danger">Simpan ?</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{-- /End Absen --}}
     @endforeach
 @endsection

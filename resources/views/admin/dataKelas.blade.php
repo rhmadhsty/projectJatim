@@ -50,7 +50,8 @@
                         </div>
                         <div class="card-footer pt-3 d-flex justify-content-center">
                             <div class="budget-price-square justify-content-center">
-                                {{-- <button class="btn btn-primary">Tambah Kelas</button> --}}
+                                <button class="btn btn-success" data-toggle="modal" type="button"
+                                    data-target="#importKelas">Import Data Kelas</button>
                                 <button class="btn btn-primary" data-toggle="modal" type="button"
                                     data-target="#tambahKelas"><i class="bi bi-plus-lg"> Tambah
                                         data</i></button>
@@ -151,6 +152,35 @@
     {{-- /End Form Tambah Data Kelas --}}
 
     {{-- Modal Tambah Data Kelas --}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="importKelas">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Kelas</h5>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('kelas.import') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <div class="section-title">File Data Kelas</div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="import-kelas" name="import-kelas"
+                                    accept=".xlsx, .xls">
+                                <label class="custom-file-label" for="import-kelas">Choose file</label>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- /End Modal Tambah Data Kelas --}}
+
+    {{-- Import Kelas --}}
     <div class="modal fade" tabindex="-1" role="dialog" id="tambahKelas">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -177,5 +207,5 @@
             </div>
         </div>
     </div>
-    {{-- /End Modal Tambah Data Kelas --}}
+    {{-- /End Import Kelas --}}
 @endsection

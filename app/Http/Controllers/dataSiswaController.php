@@ -48,18 +48,16 @@ class dataSiswaController extends Controller
     {
         // dd($request);
         try {
-            $data = [
-                'kelas_id' => $request['kelas_id'],
-                'nis' => $request['nis'],
-                'username' => $request['username'],
-                'nama' => $request['nama'],
-                'tanggal_lahir' => $request['tanggal_lahir'],
-                'email' => $request['email'],
-                'password' => $request['password'],
-                'telepon' => $request['telepon'],
-                // 'no_telp' => $request['no_telp'],
-            ];
-            $this->siswaService->create($data);
+            // validasi data siswa yang dikirim dari siswaRequest
+            $request->validate([
+                'image-siswa'=>'image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
+
+            // mengecek apakah ada data image atau tidak
+            if ($request->file('image-siswa')) {
+                $dataImage = $request->file('image-siswa')->store('siswa-images');
+            }
+            $this->siswaService->create($request->all(), $dataImage);
             Alert::success('Berhasil', 'Berhasil Menambahkan data Siswa');
             return back();
         } catch (Exception $Exceptation) {

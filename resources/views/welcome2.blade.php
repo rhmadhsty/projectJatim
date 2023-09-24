@@ -57,24 +57,6 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-<<<<<<< HEAD
-
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script>
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('5b9530aa9c1341370361', {
-            cluster: 'ap1'
-        });
-
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-            alert(JSON.stringify(data));
-        });
-    </script>
-=======
->>>>>>> dev-rhma
 </head>
 
 <body>
@@ -127,11 +109,7 @@
                                 <div class="shoping_bag">
                                 </div>
                             </div>
-<<<<<<< HEAD
-                            <div id="myNav" class="overlay">
-=======
                             {{-- <div id="myNav" class="overlay">
->>>>>>> dev-rhma
                                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                                 <div class="overlay-content">
                                     <a href="index.html">Home</a>
@@ -141,17 +119,10 @@
                                     <a href="team.html">Team</a>
                                     <a href="contact.html">Contact Us</a>
                                 </div>
-<<<<<<< HEAD
-                            </div>
-                            <span class="navbar-toggler-icon"></span>
-                            <span onclick="openNav()"><img src="{{ asset('capiclean/images/toggle-icon.png') }}"
-                                    class="toggle_menu"></span>
-=======
                             </div> --}}
                             <span class="navbar-toggler-icon"></span>
                             {{-- <span onclick="openNav()"><img src="{{ asset('capiclean/images/toggle-icon.png') }}"
                                     class="toggle_menu"></span> --}}
->>>>>>> dev-rhma
                         </ul>
                     </div>
                 </div>

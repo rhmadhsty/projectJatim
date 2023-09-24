@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/fontawesome/css/all.min.css') }}">
 
+    {{-- CHARTS --}}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
     {{-- JQuery --}}
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -22,8 +26,16 @@
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" /> --}}
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/jquery-selectric/selectric.css') }}">
 
+    {{-- DROPZONE --}}
+    {{-- <link rel="stylesheet" href="path/to/dropzone.min.css">
+    <script src="path/to/dropzone.min.js"></script> --}}
+
+
     <!-- Favicon -->
     <link href="{{ asset('assets/img/logo-1.png') }}" rel="icon">
+
+    {{-- icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/assets/css/style.css') }}">
@@ -172,7 +184,7 @@
                                 <span>Rekap Laporan</span></a>
                         </li>
                         <li class="{{ request()->is('blog') ? 'active' : '' }}">
-                            <a href="{{ route('blog.index') }}" class="nav-link"><i class="far fa-file-alt"></i>
+                            <a href="{{ route('blog.index') }}" class="nav-link"><i class="bi bi-substack"></i>
                                 <span>BLOG</span></a>
                         </li>
                     </ul>
@@ -186,8 +198,8 @@
 
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
-                        Nauval Azhar</a>
+                    Copyright &copy; 2023 <div class="bullet"></div> Design By <a
+                        href="https://smanlenteng.sch.id/">SMAN 1 LENTENG</a>
                 </div>
                 <div class="footer-right">
 
@@ -227,8 +239,9 @@
     {{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
-    <script>
+    {{-- <script>
         Dropzone.options.myDropzone = {
             paramName: "file", // Nama field yang akan digunakan untuk mengirim file
             maxFilesize: 5, // Batasan ukuran file dalam megabyte
@@ -240,7 +253,17 @@
                 });
             }
         };
-    </script>
+    </script> --}}
+
+
+    {{-- DROPZONE --}}
+    {{-- <script>
+        Dropzone.options.myDropzone = {
+          url: "/upload", // URL endpoint untuk mengirim gambar ke server
+          autoProcessQueue: false, // Untuk menghindari unggah otomatis saat file dipilih
+        };
+      </script> --}}
+
 
     {{-- <script>
         var uploadedDocumentMap = {}

@@ -24,6 +24,7 @@ class StoreRequest extends FormRequest
     // protected FormRequest $formRequest;
     public function rules(): array
     {
+        // dd($this);
         return [
             'name' => ['required'],
             'role' => ['required'],
@@ -33,6 +34,7 @@ class StoreRequest extends FormRequest
             'nik' => ['required', 'unique:user'],
             'tanggal_lahir' => ['required'],
             'no_telp' => ['required'],
+            // 'image_user' => ['kelas'],
         ];
     }
     protected function passedValidation()

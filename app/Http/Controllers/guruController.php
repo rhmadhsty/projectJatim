@@ -10,6 +10,8 @@ use App\Http\Requests\StoreRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests;
 use App\Http\Requests\editGuruRequest;
+use App\Imports\GuruImport;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class guruController extends Controller
@@ -17,8 +19,10 @@ class guruController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // pemanggilan untuk memudahkan memanggil file service
     protected GuruService $guruService;
 
+    // penyambungan guru service dan dengan guru controller
     public function __construct(GuruService $guruService)
     {
         $this->guruService = $guruService;
@@ -26,12 +30,20 @@ class guruController extends Controller
 
     public function index()
     {
-        $guru = User::latest()
+        $guru = User::where('role', 'guru')
+            ->latest()
             ->filter(request(['search']))
             ->get();
 
         // dd($guru);
         return view('admin.dataGuru', compact('guru'));
+    }
+
+    public function import()
+    {
+        Excel::import(new GuruImport(), request()->file('import-guru'));
+        Alert::success('Berhail Import!');
+        return redirect()->back();
     }
 
     /**
@@ -48,23 +60,27 @@ class guruController extends Controller
     public function store(StoreRequest $request)
     {
         try {
-            $data = [
-                'name' => $request['name'],
-                'role' => $request['role'],
-                'email' => $request['email'],
-                'password' => $request['password'],
-                'divisi' => $request['divisi'],
-                'nik' => $request['nik'],
-                'tanggal_lahir' => $request['tanggal_lahir'],
-                'no_telp' => $request['no_telp'],
-            ];
+            // validasi data image yang ada di form storerequest
+            $request->validate([
+                'image_user' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-            $this->guruService->create($data);
+            // mengecek apakah ada image atau tidak
+            if ($request->file('image_user')) {
+                $dataImage = $request->file('image_user')->store('guru-images');
+            }
+            // $this->guruService->create($dataImage);
+            // dd($request->all());
+            // pengiriman data ke guruservice untuk dimasukkan kedalam databse
+            $this->guruService->create($request->all(), $dataImage);
 
+            // notifikasi berhasil dimasukkan ke database
             Alert::success('Berhasil', 'Berhasil Menambahkan Data Guru!');
 
+            // Kembali ke halaman guru.index
             return redirect()->route('data_guru.index');
         } catch (Exception $Exceptation) {
+            // jika gagal memasukkan ke database
             Alert::warning('Gagal', 'Gagal Menambahkan Data!');
             return back();
         }
@@ -91,24 +107,33 @@ class guruController extends Controller
      */
     public function update(editGuruRequest $request, User $model)
     {
-        // dd($request['email']);
+        // dd($request);
         try {
-            $data = [
-                'user_id' => $request['user_id'],
-                'name' => $request['name'],
-                'role' => $request['role'],
-                'email' => $request['email'],
-                'password' => $request['password'],
-                'divisi' => $request['divisi'],
-                'nik' => $request['nik'],
-                'tanggal_lahir' => $request['tanggal_lahir'],
-                'no_telp' => $request['no_telp'],
-            ];
+            // validasi data yang ada di form editgurustore
+            $request->validate([
+                'image_user' => 'image|file|max:2048',
+            ]);
             // dd($data);
-            $this->guruService->update($model, $data);
+
+            //pengecekan apakah image ada foto atau tidak
+            if ($request->file('image_user')) {
+                $dataimage = $request->file('image_user')->store('guru-images');
+            }
+            else{
+                
+            }
+            // dd($data);
+
+            // mengirim data ke guru service untuk dimasukkan ke dalam database
+            $this->guruService->update($dataimage ,$model , $request->all());
+
+            // notifikasi berhasil
             Alert::success('Berhasil', 'Berhasil Edit Data Guru!');
+
+            // kembali ke dataguru
             return back();
         } catch (Exception $Exception) {
+            // notifikasi jika gagal menupdate
             Alert::warning('Gagal', 'Gagal Mengedit Data Guru!');
         }
     }

@@ -26,28 +26,7 @@
                                     <tr>
                                         <td class="text-center">{{ $item->nama }}</td>
                                         <td class="text-center">{{ $item->nis }}</td>
-                                        <td class="text-center">{{ $item->NIS }}</td>
-                                    </tr>
-                                @endforeach
-                                {{-- @endif --}}
-                                {{-- Form Tambah Data Siswa --}}
-                                <form class="modal-part" id="modal-siswa" method="POST"
-                                    action="{{ route('data_kelas.getData.store', $item->kelas_id ? $item->kelas_id : 1) }}"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" name="kelas_id" value="{{ $item->kelas_id }}">
-                                    <div class="form-group">
-                                        <label>Nama Siswa</label>
-                                        <input type="text" class="form-control" required name="nama">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>NIS</label>
-                                        <input type="text" class="form-control" required name="NIS">
-                                    </div>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button class="btn btn-primary" type="submit">Tambah Data</button>
-                                </form>
-                                {{-- /End Form Tambah Data Siswa --}}
+                                        {{-- <td class="text-center">{{ $item->NIS }}</td> --}}
                                         <td class="text-center">
                                             <div class="input-group text-center ">
                                                 <button class="btn btn-success" data-toggle="modal"
@@ -56,13 +35,17 @@
                                                     method="POST">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="badge badge-pill btn btn-danger "
-                                                        type="submit" onclick="return confirm('Yakin Mau Dihapus?')"><i
+                                                    <button class="btn btn-danger " type="submit"
+                                                        onclick="return confirm('Yakin Mau Dihapus?')"><i
                                                             class="fa fa-trash"></i></button>
                                                 </form>
                                             </div>
                                         </td>
                                     </tr>
+                                @endforeach
+                                {{-- @endif --}}
+
+                                </tr>
                             @else
                                 <tr>
                                     <td colspan="2" class="text-center">Tidak Ada Data Siswa.</td>
@@ -75,9 +58,6 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection
 {{-- @dd($kelas) --}}
 
@@ -98,6 +78,13 @@
                     <div class="modal-body">
                         <input type="hidden" name="kelas_id" value="{{ $item->kelas_id }}">
                         <input type="hidden" name="is_active" value="1">
+                        <div class="form-group">
+                            <div class="section-title">Foto Siswa</div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image-siswa" name="image-siswa">
+                                <label class="custom-file-label" for="image-siswa">Choose file</label>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label>Nama Siswa</label>
                             <input type="text" class="form-control" required name="nama">
