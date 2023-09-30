@@ -20,20 +20,6 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/prism/prism.css') }}">
-    <link rel="stylesheet" href="{{ asset('stisla/assets/modules/summernote/summernote-bs4.css') }}">
-    <link rel="stylesheet" href="{{ asset('stisla/assets/modules/codemirror/lib/codemirror.css') }}">
-    <link rel="stylesheet" href="{{ asset('stisla/assets/modules/codemirror/theme/duotone-dark.css') }}">
-    <link rel="stylesheet" href="{{ asset('stisla/assets/modules/jquery-selectric/selectric.css') }}">
-
-    {{-- Dropzone --}}
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
-
-    <!-- Favicon -->
-    <link href="{{ asset('assets/img/logo-1.png') }}" rel="icon">
 
     {{-- icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -58,7 +44,6 @@
 </head>
 
 <body>
-    @include('sweetalert::alert')
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
@@ -72,8 +57,8 @@
                     </ul>
                     @yield('search')
                 </div>
-                <ul class="navbar-nav navbar-right">
                     {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+>>>>>>> dev-rhma
                             class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
                             <div class="dropdown-header">Notifications
@@ -132,22 +117,26 @@
                                 <a href="#">View All <i class="fas fa-chevron-right"></i></a>
                             </div>
                         </div>
-                    </li> --}}
+                    </li>
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="{{ asset('stisla/assets/img/avatar/avatar-1.png') }}"
-                                class="rounded-circle mr-1">
+                            <img alt="image" src="{{ asset('stisla/assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Semangat Bekerja !</div>
-                            <a href="#" class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                          document.getElementById('logout-form').submit();">
+                            <div class="dropdown-title">Logged in 5 min ago</div>
+                            <a href="features-profile.html" class="dropdown-item has-icon">
+                                <i class="far fa-user"></i> Profile
+                            </a>
+                            <a href="features-activities.html" class="dropdown-item has-icon">
+                                <i class="fas fa-bolt"></i> Activities
+                            </a>
+                            <a href="features-settings.html" class="dropdown-item has-icon">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
                             </a>
                         </div>
                     </li>
@@ -168,26 +157,20 @@
                                     class="fas fa-fire"></i><span>Beranda</span></a>
                         </li>
                         <li class="{{ request()->is('data_guru') ? 'active' : '' }}">
-                            <a href="{{ route('data_guru.index') }}" class="nav-link"><i class="bi bi-person-fill"></i>
+                            <a href="{{ route('data_guru.index') }}" class="nav-link"><i class="far fa-user"></i>
                                 <span>Data Guru</span></a>
                         </li>
                         <li class="{{ request()->is('data_siswa') ? 'active' : '' }}">
-                            <a href="{{ route('data_siswa.index') }}" class="nav-link"><i
-                                    class="bi bi-people-fill"></i>
+                            <a href="{{ route('data_siswa.index') }}" class="nav-link"><i class="fa fa-user"></i>
                                 <span>Data Siswa</span></a>
                         </li>
                         <li class="{{ request()->is('data_kelas') ? 'active' : '' }}">
-                            <a href="{{ route('data_kelas.index') }}" class="nav-link"><i
-                                    class="bi bi-door-closed-fill"></i>
+                            <a href="{{ route('data_kelas.index') }}" class="nav-link"><i class="fa fa-user"></i>
                                 <span>Data Kelas</span></a>
                         </li>
                         <li class="{{ request()->is('rekap') ? 'active' : '' }}">
                             <a href="{{ route('rekap.index') }}" class="nav-link"><i class="far fa-file-alt"></i>
                                 <span>Rekap Laporan</span></a>
-                        </li>
-                        <li class="{{ request()->is('blog') ? 'active' : '' }}">
-                            <a href="{{ route('blog.index') }}" class="nav-link"><i class="bi bi-substack"></i>
-                                <span>BLOG</span></a>
                         </li>
                     </ul>
                 </aside>
@@ -222,15 +205,9 @@
 
     <!-- JS Libraies -->
     <script src="{{ asset('stisla/assets/modules/prism/prism.js') }}"></script>
-    <script src="{{ asset('stisla/assets/modules/summernote/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('stisla/assets/modules/codemirror/lib/codemirror.js') }}"></script>
-    <script src="{{ asset('stisla/assets/modules/codemirror/mode/javascript/javascript.js') }}"></script>
-    <script src="{{ asset('stisla/assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('stisla/assets/js/page/bootstrap-modal.js') }}"></script>
-    <script src="{{ asset('stisla/assets/js/page/modules-sweetalert.js') }}"></script>
-    <script src="{{ asset('stisla/assets/modules/sweetalert/sweetalert.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('stisla/assets/js/scripts.js') }}"></script>
@@ -238,6 +215,13 @@
 
     {{-- Modal Js Costum --}}
     <script src="{{ asset('assets/js/modal.js') }}"></script>
+{{-- <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+======= --}}
+    {{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
+{{-- >>>>>>> dev-rhma
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3 --}}
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
     {{-- Dropzone --}}

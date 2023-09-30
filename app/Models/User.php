@@ -26,7 +26,10 @@ class User extends Authenticatable
         'nik',
         'no_telp',
         'tanggal_lahir',
+<<<<<<< HEAD
         // 'image_user',
+=======
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
     ];
 
     /**

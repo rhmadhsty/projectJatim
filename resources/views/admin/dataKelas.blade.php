@@ -4,6 +4,12 @@
     <div class="main-content">
         <section class="section">
             <div class="row">
+<<<<<<< HEAD
+                <div class="col-lg-4">
+                    <div class="card gradient-bottom">
+                        <div class="card-header">
+                            <h4>DATA PERKELAS</h4>
+=======
                 <div class="col-lg-5">
                     <div class="card">
                         <div class="card-header">
@@ -19,6 +25,7 @@
                                     </div>
                                 </form>
                             </div>
+>>>>>>> dev-rhma
                         </div>
                         <div class="card-body">
                             <ul class="nav nav-pills flex-column" id="myTab4" role="tablist">
@@ -27,6 +34,16 @@
                                     {{-- Perulangan Data Perkelas --}}
                                     @foreach ($kelas as $item)
                                         <li class="nav-item">
+<<<<<<< HEAD
+                                            {{-- <a class="nav-link" id="home-tab4" data-toggle="tab" href="#kelas" role="tab"
+                                aria-controls="home" aria-selected="true"
+                                onclick="dataSiswa('{{ $item->kelas_id }}')">{{ $item->kelas }} -
+                                {{ $item->jurusan }}</a> --}}
+                                            <a class="nav-link"
+                                                href="{{ route('data_kelas.getData.index', $item->kelas_id) }}">{{ $item->kelas }}
+                                                -
+                                                {{ $item->jurusan }}</a>
+=======
                                             <a class="nav-link float-left"
                                                 href="{{ route('data_kelas.getData.index', $item->kelas_id) }}">{{ $item->kelas }}
                                                 -
@@ -39,6 +56,7 @@
                                                     onclick="return confirm('Yakin Mau Dihapus?')"><i
                                                         class="fa fa-trash"></i></button>
                                             </form>
+>>>>>>> dev-rhma
                                         </li>
                                     @endforeach
                                     {{-- /End Perulangan Data Perkelas --}}
@@ -49,21 +67,44 @@
                             </ul>
                         </div>
                         <div class="card-footer pt-3 d-flex justify-content-center">
+<<<<<<< HEAD
+                            <div class="budget-price justify-content-center">
+                                <div class="budget-price-square bg-primary" data-width="20"></div>
+                                <div class="budget-price-label">Selling Price</div>
+                            </div>
+                            <div class="budget-price justify-content-center">
+                                <div class="budget-price-square bg-danger" data-width="20"></div>
+                                <div class="budget-price-label">Budget Price</div>
+=======
                             <div class="budget-price-square justify-content-center">
                                 <button class="btn btn-success" data-toggle="modal" type="button"
                                     data-target="#importKelas">Import Data Kelas</button>
                                 <button class="btn btn-primary" data-toggle="modal" type="button"
                                     data-target="#tambahKelas"><i class="bi bi-plus-lg"> Tambah
                                         data</i></button>
+>>>>>>> dev-rhma
                             </div>
                         </div>
                     </div>
                 </div>
                 @yield('get')
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev-rhma
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
             </div>
         </section>
     </div>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
 
 
 
@@ -133,6 +174,7 @@
         </div>
     </div>
 
+>>>>>>> dev-rhma
 
     {{-- Form Tambah Data Kelas --}}
     {{-- <form class="modal-part" id="modal-kelas" method="POST" action="{{ route('data_kelas.store') }}"
@@ -150,6 +192,8 @@
         <button class="btn btn-primary" type="submit">Tambah Data</button>
     </form> --}}
     {{-- /End Form Tambah Data Kelas --}}
+<<<<<<< HEAD
+=======
 
     {{-- Modal Tambah Data Kelas --}}
     <div class="modal fade" tabindex="-1" role="dialog" id="importKelas">
@@ -207,5 +251,10 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     {{-- /End Import Kelas --}}
+=======
+    {{-- /End Modal Tambah Data Kelas --}}
+>>>>>>> dev-rhma
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
 @endsection

@@ -29,7 +29,10 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Rahma Fitriani',
+<<<<<<< HEAD
             'image_user' => 'rahma.jpg',
+=======
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
             'role' => 'admin',
             'email' => 'rhmadhsty@gmail.com',
             'password' => Hash::make('12345678'),
@@ -38,11 +41,14 @@ class DatabaseSeeder extends Seeder
             'tanggal_lahir' => '2004-11-18',
             'no_telp' => '234',
         ]);
+<<<<<<< HEAD
 
         // Kelas::create([
         //     'kelas' => '11',
         //     'jurusan' => 'Rekayasa Perangkat Lunak 1',
         // ]);
+=======
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
 
         // Kelas::create([
         //     'kelas' => '11',

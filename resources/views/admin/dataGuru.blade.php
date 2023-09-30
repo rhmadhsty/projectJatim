@@ -2,6 +2,7 @@
 
 
 @section('search')
+<<<<<<< HEAD
     {{-- <form action="{{ route('data_guru.index') }}"> --}}
     <div class="search-element">
         {{-- mengirim data search kepada ajax --}}
@@ -13,6 +14,24 @@
         {{-- <div class="search-backdrop"></div> --}}
     </div>
     {{-- </form> --}}
+=======
+<<<<<<< HEAD
+    <div class="search-element">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
+        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        <div class="search-backdrop"></div>
+    </div>
+=======
+    <form action="{{ route('data_guru.index') }}">
+        <div class="search-element">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250" name="search"
+                value="{{ request('search') }}">
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+            <div class="search-backdrop"></div>
+        </div>
+    </form>
+>>>>>>> dev-rhma
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
 @endsection
 
 @push('js')
@@ -67,8 +86,15 @@
                                 @if ($guru->count())
                                     @foreach ($guru as $item)
                                         {{-- @dd($item->role == 'admin') --}}
+<<<<<<< HEAD
+                                        @if ($item == true)
+=======
                                         @if ($item->role == 'guru')
+<<<<<<< HEAD
                                             {{-- @dd($item->image_user) --}}
+=======
+>>>>>>> dev-rhma
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
                                             <li class="media">
                                                 <div class="avatar-item">
                                                     <img alt="image"
@@ -79,6 +105,101 @@
                                                         title="" data-original-title="{{ $item->name }}">
                                                     <div class="avatar-badge" title="" data-toggle="tooltip"
                                                         data-original-title="Edit">
+<<<<<<< HEAD
+                                                        <a href="#" type="button"
+                                                            onclick="editGuru('{{ $item->user_id }}','{{ $item->name }}', '{{ $item->divisi }}', '{{ $item->nik }}', '{{ $item->email }}', '{{ $item->password }}', '{{ $item->no_telp }}', '{{ $item->tanggal_lahir }}')"
+                                                            data-toggle="modal" data-target="#editGuru"><i
+                                                                class="fas fa-pencil-alt"></i></a>
+                                                        <div class="modal fade" tabindex="-1" role="dialog"
+                                                            id="editGuru">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Edit Guru</h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form method="POST"
+                                                                            action="{{ route('data_guru.store') }}"
+                                                                            enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            <div class="form-group">
+                                                                                <label>Nama Guru</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    required name="name"
+                                                                                    value="{{ $item->name }}">
+                                                                            </div>
+                                                                            <input type="hidden" name="role"
+                                                                                value="guru">
+                                                                            <div class="form-group">
+                                                                                <label>Ema-il</label>
+                                                                                <input type="email" class="form-control"
+                                                                                    required name="email">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Password</label>
+                                                                                <div class="input-group">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <span class="input-group-text"
+                                                                                            id="showHide"><i
+                                                                                                class="bi bi-eye"></i></span>
+                                                                                    </div>
+                                                                                    <input type="password"
+                                                                                        class="form-control pwstrength"
+                                                                                        data-indicator="pwindicator"
+                                                                                        name="password" id="password">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Divisi</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    required name="divisi">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>NIK</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    required name="nik">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Tanggal Lahir</label>
+                                                                                <input type="text"
+                                                                                    class="form-control datemask"
+                                                                                    placeholder="YYYY/MM/DD"
+                                                                                    name="tanggal_lahir">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>No Telepon</label>
+                                                                                <div class="input-group">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <div class="input-group-text">
+                                                                                            <i class="fas fa-phone"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <input type="text"
+                                                                                        class="form-control phone-number"
+                                                                                        required name="no_telp">
+                                                                                </div>
+                                                                            </div>
+                                                                    </div>
+                                                                    <div class="modal-footer bg-whitesmoke br">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Tambah data</button>
+                                                                    </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="badge badge-pill badge-success mb-1 float-right">Online
+                                                    </div>
+=======
                                                         <a href="#" type="button" data-toggle="modal"
                                                             data-target="#editGuru-{{ $item->user_id }}"><i
                                                                 class="fas fa-pencil-alt"></i></a>
@@ -97,6 +218,7 @@
                                                         class="badge badge-pill btn btn-success mb-1 float-right"
                                                         href="#" data-toggle="modal"
                                                         data-target="#detailGuru-{{ $item->user_id }}">Detail</a>
+>>>>>>> dev-rhma
                                                     <h6 class="media-title">{{ $item->name }}</h6>
                                                     <div class="text-small text-muted">{{ $item->divisi }} <div
                                                             class="bullet">
@@ -108,17 +230,56 @@
                                         @endif
                                     @endforeach
                                 @else
+<<<<<<< HEAD
                                     <p class="text-center">Tidak Ada Data Guru.</p>
+=======
+<<<<<<< HEAD
+=======
+                                    <p>Tidak Ada Data Guru tersebut.</p>
+>>>>>>> dev-rhma
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
                                 @endif
 
                                 {{-- End Perulangan --}}
                             </ul>
+<<<<<<< HEAD
+                            <p class="mb-2">Use the Bootstrap method to create modal. You need to create an HTML
+                                structure for modal and the following button will trigger it.</p>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Aw,
+                                yeah!</button>
+=======
+>>>>>>> dev-rhma
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+<<<<<<< HEAD
+=======
+        <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<<<<<<< HEAD
+=======
+>>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3
         @foreach ($guru as $item)
             {{-- @dd($item) --}}
             <div class="modal fade" tabindex="1" role="dialog" id="editGuru-{{ $item->user_id }}">
@@ -286,6 +447,7 @@
             </div>
             {{-- End Detail Guru --}}
         @endforeach
+>>>>>>> dev-rhma
 
         <div class="modal fade" tabindex="-1" role="dialog" id="ImportGuru">
             <div class="modal-dialog" role="document">
@@ -389,4 +551,10 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> dev-rhma
 @endsection
