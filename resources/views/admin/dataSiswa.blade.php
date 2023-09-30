@@ -21,6 +21,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Data Siswa ({{ $siswa->count() }})</h4>
+                            <div class="card-header-action">
+                                <button class="btn btn-success" data-toggle="modal" data-target="#ImportSiswa">
+                                    Import data Siswa
+                                </button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -74,6 +79,40 @@
             </div>
         </section>
     </div>
+
+    {{-- Modal Import --}}
+    <div class="modal fade" tabindex="-1" role="dialog" id="ImportSiswa">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Siswa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('siswa.import') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <div class="section-title">File Data Siswa</div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="import-guru" name="import-guru"
+                                    accept=".xlsx, .xls">
+                                <label class="custom-file-label" for="import-guru">Choose file</label>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Tambah data</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- /Modal Import --}}
+
+
     @foreach ($siswa as $item)
         {{-- Detail Siswa --}}
         <div class="modal fade" tabindex="1" role="dialog" id="detailSiswa-{{ $item->siswa_id }}">
@@ -94,7 +133,10 @@
                                     <br>
                                     {{-- <p> --}}
                                     <figure class="avatar mr-2 avatar-xl text-center">
-                                        <img src="{{ asset('stisla/assets/img/avatar/avatar-2.png') }}" alt="foto Guru">
+                                        <img @if ($item->image_siswa == true) src="{{ asset('storage/' . $item->image_siswa) }}"
+                                                @else
+                                                src="{{ asset('stisla/assets/img/avatar/avatar-2.png') }}" @endif
+                                                    class="rounded" style="height: 100px;" alt="foto Siswa">
                                     </figure>
                                     {{-- </p> --}}
                                 </div>
@@ -172,8 +214,12 @@
                                     <label>Foto Siswa</label>
                                     <br>
                                     {{-- <p> --}}
+                                        {{-- @dd($item->image_siswa) --}}
                                     <figure class="avatar mr-2 avatar-xl text-center">
-                                        <img src="{{ asset('stisla/assets/img/avatar/avatar-2.png') }}" alt="foto Guru">
+                                        <img @if ($item->image_siswa == true) src="{{ asset('storage/' . $item->image_siswa) }}"
+                                                @else
+                                                src="{{ asset('stisla/assets/img/avatar/avatar-2.png') }}" @endif
+                                            class="rounded" style="height: 100px;" alt="foto Guru">
                                     </figure>
                                     {{-- </p> --}}
                                 </div>
@@ -204,8 +250,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <textarea type="text" class="form-control" required name="keterangan"
-                                    value="{{ $item->nis }}"></textarea>
+                                <textarea type="text" class="form-control" required name="keterangan" value="{{ $item->nis }}"></textarea>
                             </div>
                     </div>
                     <div class="modal-footer bg-whitesmoke br">

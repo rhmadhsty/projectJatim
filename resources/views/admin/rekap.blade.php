@@ -55,6 +55,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tr>
+                                    <th class="text-center">Nama guru</th>
                                     <th class="text-center">Nama Siswa</th>
                                     <th class="text-center">Kelas - Jurusan</th>
                                     <th>Status</th>
@@ -66,6 +67,14 @@
                                     @foreach ($data as $item)
                                         {{-- @dd($item->absensiSiswa) --}}
                                         <tr>
+                                            <td class="text-center">
+                                                    <div class="media-body">
+                                                        <h6     >{{ $item->absensiGuru->name }}</h6>
+                                                        <div class="text-small text-muted">{{ $item->absensiGuru->nik }}
+                                                        </div>
+                                                        <span class="text-primary">{{ $item->email }}</span>
+                                                    </div>
+                                            </td>
                                             <td class="media text-center">
                                                 <div class="media-body">
                                                     <h6 class="media-title">{{ $item->absensiSiswa->nama }}</h6>
@@ -74,7 +83,8 @@
                                                     <span class="text-primary">{{ $item->email }}</span>
                                                 </div>
                                             </td>
-                                            <td class="text-center">{{ $item->absensiSiswa->siswaKelas->kelas }} - {{ $item->absensiSiswa->siswaKelas->jurusan }}</td>
+                                            <td class="text-center">{{ $item->absensiSiswa->siswaKelas->kelas }} -
+                                                {{ $item->absensiSiswa->siswaKelas->jurusan }}</td>
                                             <td>{{ $item->status }}</td>
                                             <td>{{ $item->keterangan }}</td>
                                             {{-- <td class="text-center">
@@ -104,5 +114,5 @@
             </div>
         </section>
     </div>
-    
+
 @endsection

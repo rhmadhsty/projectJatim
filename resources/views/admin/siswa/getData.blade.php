@@ -150,6 +150,13 @@
                         <input type="hidden" name="siswa_id" id="siswa_id" value="{{ $item->siswa_id }}">
                         <input type="hidden" name="kelas_id" id="kelas_id" value="{{ $item->kelas_id }}">
                         <div class="form-group">
+                            <div class="section-title">Foto Siswa</div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image_siswa" name="image_siswa" value="{{ $item->image_siswa }}">
+                                <label class="custom-file-label" for="image_siswa">Choose file</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label>Nama Siswa</label>
                             <input type="text" class="form-control" required name="nama"
                                 value="{{ $item->nama }}">

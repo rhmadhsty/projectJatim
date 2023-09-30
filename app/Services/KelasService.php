@@ -20,16 +20,7 @@ class KelasService
 
     function create(array $data_kelas = [])
     {
-        // dd($data_kelas);
-        // DB::beginTransaction();
-        // DB::beginTransaction();
-        // try {
-            return $this->model->create($data_kelas);
-        //     DB::commit();
-        // } catch (Exception $exception) {
-        //     DB::rollBack();
-        //     return $exception;
-        // }
+        return $this->model->create($data_kelas);
     }
 
     public function getData($id)

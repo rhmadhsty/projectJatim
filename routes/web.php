@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\dataSiswaController;
+use App\Http\Controllers\DropzoneController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\guruController;
@@ -31,6 +32,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/forgotpass', function(){
+    return view('auth.forgotpass');
+});
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
@@ -51,10 +55,16 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::resource('absensi', AbsensiController::class);
     Route::post('user-import', [guruController::class, 'import'])->name('guru.import');
     Route::post('kelas-import', [KelasController::class, 'import'])->name('kelas.import');
+    Route::post('siswa-import', [siswaController::class, 'import'])->name('siswa.import');
+    Route::get('guru-search', [guruController::class, 'search'])->name('guru.search');
+    Route::resource('coba', DropzoneController::class);
 });
 
 Route::group(['middleware' => ['auth', 'role:guru']], function() {
     Route::get('/beranda', function() {
+        // $jumlah_siswa
         return view('guru.beranda');
     });
+    Route::resource('absensi', AbsensiController::class);
+    Route::get('siswa', [siswaController::class, 'tampil'])->name('siswa.tampil');
 });

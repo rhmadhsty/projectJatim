@@ -15,7 +15,7 @@
 
 
     {{-- JQuery --}}
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <!-- CSS Libraries -->
@@ -23,13 +23,14 @@
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/summernote/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/codemirror/lib/codemirror.css') }}">
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/codemirror/theme/duotone-dark.css') }}">
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" /> --}}
     <link rel="stylesheet" href="{{ asset('stisla/assets/modules/jquery-selectric/selectric.css') }}">
 
-    {{-- DROPZONE --}}
-    {{-- <link rel="stylesheet" href="path/to/dropzone.min.css">
-    <script src="path/to/dropzone.min.js"></script> --}}
+    {{-- Dropzone --}}
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link href="{{ asset('assets/img/logo-1.png') }}" rel="icon">
@@ -41,6 +42,7 @@
     <link rel="stylesheet" href="{{ asset('stisla/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('stisla/assets/css/components.css') }}">
     <!-- Start GA -->
+    @stack('css')
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -236,72 +238,16 @@
 
     {{-- Modal Js Costum --}}
     <script src="{{ asset('assets/js/modal.js') }}"></script>
-    {{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
+    {{-- Dropzone --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script> --}}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
-    {{-- <script>
-        Dropzone.options.myDropzone = {
-            paramName: "file", // Nama field yang akan digunakan untuk mengirim file
-            maxFilesize: 5, // Batasan ukuran file dalam megabyte
-            acceptedFiles: ".jpeg,.jpg,.png,.gif", // Ekstensi file yang diizinkan
-            addRemoveLinks: true, // Tampilkan tautan untuk menghapus file
-            init: function() {
-                this.on("success", function(file, response) {
-                    // Handle ketika file berhasil diunggah
-                });
-            }
-        };
-    </script> --}}
+    {{-- memanggil ajax untuk search --}}
+    {{-- @yield('script') --}}
 
+    @stack('js')
 
-    {{-- DROPZONE --}}
-    {{-- <script>
-        Dropzone.options.myDropzone = {
-          url: "/upload", // URL endpoint untuk mengirim gambar ke server
-          autoProcessQueue: false, // Untuk menghindari unggah otomatis saat file dipilih
-        };
-      </script> --}}
-
-
-    {{-- <script>
-        var uploadedDocumentMap = {}
-        Dropzone.options.documentDropzone = {
-            url: "",
-            maxFilesize: 2, // MB
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            },
-            success: function(file, response) {
-                $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                uploadedDocumentMap[file.name] = response.name
-            },
-            removedfile: function(file) {
-                file.previewElement.remove()
-                var name = ''
-                if (typeof file.file_name !== 'undefined') {
-                    name = file.file_name
-                } else {
-                    name = uploadedDocumentMap[file.name]
-                }
-                $('form').find('input[name="document[]"][value="' + name + '"]').remove()
-            },
-            init: function() {
-                @if (isset($project) && $project->document)
-                    var files =
-                        {!! json_encode($project->document) !!}
-                    for (var i in files) {
-                        var file = files[i]
-                        this.options.addedfile.call(this, file)
-                        file.previewElement.classList.add('dz-complete')
-                        $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                    }
-                @endif
-            }
-        }
-    </script> --}}
 </body>
 
 </html>

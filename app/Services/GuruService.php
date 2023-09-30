@@ -38,7 +38,7 @@ class GuruService
 
     public function update($dataImage ,User $user, array $dataGuru = [])
     {
-        // dd($dataGuru);   
+        dd($dataGuru);   
         // langsung validasi untuk update
         return $user->where('user_id', $dataGuru['user_id'])->update([
             'name'=>$dataGuru['name'],

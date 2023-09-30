@@ -28,6 +28,20 @@ class guruController extends Controller
         $this->guruService = $guruService;
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $hasil_search = User::where('name', 'like', '%' . $search . '%')
+        ->orwhere('email', 'like', '%' . $search . '%')
+        ->orwhere('divisi', 'like', '%' . $search . '%')
+        ->orwhere('nik', 'like', '%' . $search . '%')
+        ->orwhere('tanggal_lahir', 'like', '%' . $search . '%')
+        ->orwhere('no_telp', 'like', '%' . $search . '%')
+        ->orwhere('role', 'like', '%' . $search . '%')->get();
+        // dd($hasil_search);
+        return response()->json($hasil_search);
+    }
+
     public function index()
     {
         $guru = User::where('role', 'guru')
@@ -42,7 +56,7 @@ class guruController extends Controller
     public function import()
     {
         Excel::import(new GuruImport(), request()->file('import-guru'));
-        Alert::success('Berhail Import!');
+        Alert::success('Berhasil Import!');
         return redirect()->back();
     }
 
@@ -69,8 +83,11 @@ class guruController extends Controller
             if ($request->file('image_user')) {
                 $dataImage = $request->file('image_user')->store('guru-images');
             }
+            else {
+                $dataImage = 'tidakada';
+            }
             // $this->guruService->create($dataImage);
-            // dd($request->all());
+            // dd($dataImage);
             // pengiriman data ke guruservice untuk dimasukkan kedalam databse
             $this->guruService->create($request->all(), $dataImage);
 
@@ -119,22 +136,22 @@ class guruController extends Controller
             if ($request->file('image_user')) {
                 $dataimage = $request->file('image_user')->store('guru-images');
             }
-            else{
-                
-            }
             // dd($data);
 
+            // dd($dataimage);
+
             // mengirim data ke guru service untuk dimasukkan ke dalam database
-            $this->guruService->update($dataimage ,$model , $request->all());
+            $this->guruService->update($dataimage, $model, $request->all());
 
             // notifikasi berhasil
             Alert::success('Berhasil', 'Berhasil Edit Data Guru!');
 
             // kembali ke dataguru
-            return back();
+            return redirect()->back();
         } catch (Exception $Exception) {
             // notifikasi jika gagal menupdate
             Alert::warning('Gagal', 'Gagal Mengedit Data Guru!');
+            return redirect()->back();
         }
     }
 

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EditSiswaRequest;
+use App\Imports\SiswaImport;
 // use App\Http\Requests\EditSiswaRequest;
 use App\Models\Kelas;
 use App\Models\siswa;
 use App\Services\SiswaService;
 use Exception;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class siswaController extends Controller
@@ -31,6 +33,27 @@ class siswaController extends Controller
             ->get();
         $kelas = Kelas::get();
         return view('admin.dataSiswa', compact('siswa', 'kelas'));
+    }
+
+    public function tampil()
+    {
+        $siswa = siswa::latest()
+            ->filter(request(['search']))
+            ->get();
+        $kelas = Kelas::get();
+        return view('guru.datasiswa', compact('siswa', 'kelas'));
+    }
+
+    public function import()
+    {
+        try {
+            Excel::import(new SiswaImport(), request()->file('siswa-import'));
+            Alert::success('Berhasil Import!');
+            return redirect()->back();
+        } catch (Exception $E) {
+            Alert::warning('Gagal Import!');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -72,20 +95,17 @@ class siswaController extends Controller
     {
         // dd($request);
         try {
-            $data = [
-                'siswa_id' => $request['siswa_id'],
-                'kelas_id' => $request['kelas_id'],
-                'nis' => $request['nis'],
-                'nama' => $request['nama'],
-                'telepon' => $request['telepon'],
-                'tanggal_lahir' => $request['tanggal_lahir'],
-                'username' => $request['username'],
-                'email' => $request['email'],
-                'password' => $request['password'],
-            ];
-            // dd($data);
+            $coba = $request->validate([
+                'image_siswa' => 'image|file|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+            // dd($coba);
+
+            if ($request->file('image_siswa')) {
+                $dataImage = $request->file('image_siswa')->store('siswa-images');
+            }
+            // dd($dataImage);
             // $this->siswaService->update($model, $data);
-            $this->siswaService->update($model, $data);
+            $this->siswaService->update($model, $request->all(), $dataImage);
             Alert::success('Berhasil', 'Siswa Berhasil di Edit');
             return back();
         } catch (Exception $Exception) {

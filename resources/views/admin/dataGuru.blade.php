@@ -2,15 +2,45 @@
 
 
 @section('search')
-    <form action="{{ route('data_guru.index') }}">
-        <div class="search-element">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250" name="search"
-                value="{{ request('search') }}">
-            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-            <div class="search-backdrop"></div>
-        </div>
-    </form>
+    {{-- <form action="{{ route('data_guru.index') }}"> --}}
+    <div class="search-element">
+        {{-- mengirim data search kepada ajax --}}
+        {{-- <form action="{{ route('guru.search') }}"> --}}
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" data-width="250" name="search_guru"
+            id="search_guru">
+        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        {{-- </form> --}}
+        {{-- <div class="search-backdrop"></div> --}}
+    </div>
+    {{-- </form> --}}
 @endsection
+
+@push('js')
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <script>
+        $(document).ready(function() {
+            $('#search_guru').on('input', function() {
+                var query = $(this).val();
+                // console.log(query);
+
+                $.ajax({
+                    url: "{{ route('guru.search') }}",
+                    type: "GET",
+                    data: {
+                        'search': query
+                    },
+                    success: function(data) {
+                        var results = '';
+                        $.each(data, function(index, article) {
+                            results += '<div>' + article.title + '</div>';
+                        });
+                        $('#search-results').html(results);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
 
 @section('content')
     <div class="main-content">
@@ -30,7 +60,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <ul class="list-unstyled list-unstyled-border">
+                            <ul class="list-unstyled list-unstyled-border" id="search-results" >
                                 {{-- Perulangan Data guru --}}
 
                                 {{-- Perhitungan data guru untuk media search --}}
@@ -114,7 +144,7 @@
                                         {{-- @dd($item->image_user) --}}
                                         <input type="file" class="custom-file-input" id="image_user" name="image_user"
                                             value="{{ $item->image_user }}">
-                                        <label class="custom-file-label" for="image_user"></label>
+                                        <label class="custom-file-label" for="image_user">{{ $item->image_user }}</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -199,8 +229,10 @@
                                             <br>
                                             {{-- <p> --}}
                                             <figure class="avatar avatar-xl text-center">
-                                                <img src="{{ asset('storage/' . $item->image_user) }}" class="rounded"
-                                                    style="height: 100px;" alt="foto Guru">
+                                                <img @if ($item->image_user == true) src="{{ asset('storage/' . $item->image_user) }}"
+                                                @else
+                                                src="{{ asset('stisla/assets/img/avatar/avatar-2.png') }}" @endif
+                                                    class="rounded" style="height: 100px;" alt="foto Guru">
                                             </figure>
                                             {{-- </p> --}}
                                         </div>

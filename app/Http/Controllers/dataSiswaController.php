@@ -87,21 +87,21 @@ class dataSiswaController extends Controller
      */
     public function update(EditSiswaRequest $request, Siswa $model)
     {
-        try{
-            $data = [
-                'kelas_id' => $request['kelas_id'],
-                'nama' => $request['nama'],
-                'NIS' => $request['NIS'],
-            ];
+        // try{
+        //     $data = [
+        //         'kelas_id' => $request['kelas_id'],
+        //         'nama' => $request['nama'],
+        //         'NIS' => $request['NIS'],
+        //     ];
 
-            $this->siswaService->update($model, $data);
-            Alert::success('Berhasil', 'Siswa Berhasil di Edit');
-            return back();
-        }
-        catch(Exception $exception){
-            Alert::warning('Gagal', 'siswa gagal di Edit');
-            return back();
-        }
+        //     $this->siswaService->update($model, $data);
+        //     Alert::success('Berhasil', 'Siswa Berhasil di Edit');
+        //     return back();
+        // }
+        // catch(Exception $exception){
+        //     Alert::warning('Gagal', 'siswa gagal di Edit');
+        //     return back();
+        // }
     }
 
     /**
