@@ -57,8 +57,8 @@
                     </ul>
                     @yield('search')
                 </div>
-                    {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
->>>>>>> dev-rhma
+                <ul class="navbar-nav navbar-right">
+                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
                             <div class="dropdown-header">Notifications
@@ -215,13 +215,6 @@
 
     {{-- Modal Js Costum --}}
     <script src="{{ asset('assets/js/modal.js') }}"></script>
-{{-- <<<<<<< HEAD
-=======
-<<<<<<< HEAD
-======= --}}
-    {{-- <script src="{{ asset('assets/js/script.js') }}"></script> --}}
-{{-- >>>>>>> dev-rhma
->>>>>>> 9b64a56c6e68bd83319d935a2ab64b45b930dea3 --}}
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
     {{-- Dropzone --}}
